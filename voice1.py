@@ -25,3 +25,6 @@ print("Say something!")
 
 for phrase in speech:
     print(phrase)
+    if str(phrase).strip().lower() == 'стоп':
+        print("Goodbye!")
+        exit()
