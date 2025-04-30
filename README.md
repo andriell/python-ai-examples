@@ -45,11 +45,22 @@ zero_ru_cont_8k_v3.zip https://disk.yandex.ru/d/hKj3OurEhE4wng
 
 Для Windows Native требуется распространяемый пакет Microsoft Visual C++ для Visual Studio 2015, 2017 и 2019.
 
+Нужно установить последний драйвер
+https://www.nvidia.com/en-us/drivers/
+
 Эта версия будет работать на CPU
 
     pip install tensorflow
 
-Эта версия будет работать на GPU
+### Установка tensorflow[and-cuda] (для вычислений на GPU не обязательно)
+
+1. Драйверы графического процессора NVIDIA® https://www.nvidia.com/drivers
+
+2. Инструментарий CUDA® 12.3. https://developer.nvidia.com/cuda-toolkit-archive
+3. cuDNN SDK 8.9.7. https://developer.nvidia.com/cudnn
+4. (Необязательно) TensorRT для улучшения задержки и пропускной способности вывода. https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html#trt_7 
+
+Эта версия будет работать на GPU, ее можно и не ставить
 
     pip install tensorflow[and-cuda]
 
