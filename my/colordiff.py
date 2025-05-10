@@ -15,6 +15,6 @@ for y in range(1, im.size[1]):
             max(abs(pix[x,y][2]-pix[x-1,y][2]), abs(pix[x,y][2]-pix[x,y-1][2]), abs(pix[x,y][2]-pix[x-1,y-1][2])),
         )
 
-out.save('colordiff_out.png')  # Save the modified pixels as .png
+out.save('colordiff_out.jpg')  # Save the modified pixels as .png
 print("End")
 exit()
