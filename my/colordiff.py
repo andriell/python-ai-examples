@@ -20,5 +20,6 @@ def doDiff(imgin, imgout):
 
 doDiff("colordiff_in.jpg", "colordiff_out.jpg")
 doDiff("colordiff_in2.jpg", "colordiff_out2.jpg")
+doDiff("colordiff_in3.jpg", "colordiff_out3.jpg")
 print("End")
 exit()
