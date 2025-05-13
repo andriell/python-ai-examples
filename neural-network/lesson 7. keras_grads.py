@@ -9,13 +9,14 @@ from tensorflow.keras.layers import Input
 
 c = np.array([-40, -10, 0, 8, 15, 22, 38])
 f = np.array([-40, 14, 32, 46, 59, 72, 100])
+# f = np.array([-40, 14, 32, 46.4, 59, 71.6, 100.4])
 
 model = keras.Sequential()
 model.add(Input(shape=(1,)))
 model.add(Dense(units=1, activation='linear'))
 model.compile(loss='mean_squared_error', optimizer=keras.optimizers.Adam(0.1))
-
-history = model.fit(c, f, epochs=500, verbose=0)
+# model.set_weights(([np.array([[9/5]]), np.array([32])]))
+history = model.fit(c, f, epochs=5, verbose=0)
 print("Обучение завершено")
 
 print(model.predict(x=np.array([100])))
