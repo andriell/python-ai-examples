@@ -1,0 +1,6 @@
+services:
+  python312:
+    image: python:3.12.10-slim
+    command: tail -F anything
+    volumes:
+      - ./:/home/app

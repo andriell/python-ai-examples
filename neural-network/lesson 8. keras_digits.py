@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist         # библиотека базы выборок Mnist
 from tensorflow import keras
-from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.layers import Dense, Flatten, Input
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -18,8 +18,8 @@ y_test_cat = keras.utils.to_categorical(y_test, 10)
 
 # отображение первых 25 изображений из обучающей выборки
 plt.figure(figsize=(10,5))
-for i in range(25):
-    plt.subplot(5,5,i+1)
+for i in range(256):
+    plt.subplot(16,16,i+1)
     plt.xticks([])
     plt.yticks([])
     plt.imshow(x_train[i], cmap=plt.cm.binary)
@@ -27,8 +27,11 @@ for i in range(25):
 plt.show()
 
 model = keras.Sequential([
-    Flatten(input_shape=(28, 28, 1)),
+    Input(shape=(28, 28, 1)),
+    Flatten(), # Преобразует картинку в вектор
     Dense(128, activation='relu'),
+    Dense(64, activation='relu'),
+    Dense(32, activation='relu'),
     Dense(10, activation='softmax')
 ])
 
@@ -39,8 +42,9 @@ model.compile(optimizer='adam',
              metrics=['accuracy'])
 
 
-model.fit(x_train, y_train_cat, batch_size=32, epochs=5, validation_split=0.2)
+model.fit(x_train, y_train_cat, batch_size=32, epochs=7, validation_split=0.2)
 
+print("evaluate")
 model.evaluate(x_test, y_test_cat)
 
 n = 1
@@ -72,8 +76,8 @@ print(x_false.shape)
 
 # Вывод первых 25 неверных результатов
 plt.figure(figsize=(10,5))
-for i in range(25):
-    plt.subplot(5,5,i+1)
+for i in range(256):
+    plt.subplot(16,16,i+1)
     plt.xticks([])
     plt.yticks([])
     plt.imshow(x_false[i], cmap=plt.cm.binary)
