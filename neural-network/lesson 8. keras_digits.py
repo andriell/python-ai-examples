@@ -42,7 +42,7 @@ model.compile(optimizer='adam',
              metrics=['accuracy'])
 
 
-model.fit(x_train, y_train_cat, batch_size=32, epochs=25, validation_split=0.2)
+model.fit(x_train, y_train_cat, batch_size=32, epochs=7, validation_split=0.2)
 
 print("evaluate")
 model.evaluate(x_test, y_test_cat)
