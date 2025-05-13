@@ -12,7 +12,7 @@
     pip install SpeechRecognition
     pip install networkx
     pip install matplotlib
-    pip install tensorflow
+    pip3 install tensorflow
     pip3 install pocketsphinx
     pip install pillow
 
@@ -51,19 +51,18 @@ https://www.nvidia.com/en-us/drivers/
 
 Эта версия будет работать на CPU
 
-    pip install tensorflow
+    pip3 install tensorflow
 
 ### Установка tensorflow[and-cuda] (для вычислений на GPU не обязательно)
 
 1. Драйверы графического процессора NVIDIA® https://www.nvidia.com/drivers
-
 2. Инструментарий CUDA® 12.3. https://developer.nvidia.com/cuda-toolkit-archive
 3. cuDNN SDK 8.9.7. https://developer.nvidia.com/cudnn
 4. (Необязательно) TensorRT для улучшения задержки и пропускной способности вывода. https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html#trt_7 
 
 Эта версия будет работать на GPU, ее можно и не ставить
 
-    pip install tensorflow[and-cuda]
+    pip3 install tensorflow[and-cuda]
 
 Проверка установки
 
