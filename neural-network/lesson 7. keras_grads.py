@@ -16,11 +16,12 @@ model.add(Input(shape=(1,)))
 model.add(Dense(units=1, activation='linear'))
 model.compile(loss='mean_squared_error', optimizer=keras.optimizers.Adam(0.1))
 # model.set_weights(([np.array([[9/5]]), np.array([32])]))
-history = model.fit(c, f, epochs=5, verbose=0)
+history = model.fit(c, f, epochs=500, verbose=0)
 print("Обучение завершено")
 
 print(model.predict(x=np.array([100])))
 print(model.get_weights())
+print(model.save_weights(filepath='lesson7.weights.h5'))
 
 plt.plot(history.history['loss'])
 plt.grid(True)
