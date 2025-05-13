@@ -42,7 +42,7 @@ model.compile(optimizer='adam',
              metrics=['accuracy'])
 
 
-model.fit(x_train, y_train_cat, batch_size=32, epochs=7, validation_split=0.2)
+model.fit(x_train, y_train_cat, batch_size=32, epochs=25, validation_split=0.2)
 
 print("evaluate")
 model.evaluate(x_test, y_test_cat)
@@ -76,8 +76,8 @@ print(x_false.shape)
 
 # Вывод первых 25 неверных результатов
 plt.figure(figsize=(10,5))
-for i in range(256):
-    plt.subplot(16,16,i+1)
+for i in range(25):
+    plt.subplot(5,5,i+1)
     plt.xticks([])
     plt.yticks([])
     plt.imshow(x_false[i], cmap=plt.cm.binary)
