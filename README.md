@@ -15,6 +15,7 @@
     pip3 install tensorflow
     pip3 install pocketsphinx
     pip install pillow
+    pip install pydot graphviz
 
 ## Установка распознания речи
 

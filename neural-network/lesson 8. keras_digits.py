@@ -43,6 +43,19 @@ model.compile(optimizer='adam',
 
 
 model.fit(x_train, y_train_cat, batch_size=32, epochs=7, validation_split=0.2)
+print(model.save_weights(filepath='lesson8.weights.h5'))
+keras.utils.plot_model(
+    model,
+    to_file="lesson8.model.png",
+    show_shapes=True,
+    show_dtype=True,
+    show_layer_names=True,
+    rankdir="TB",
+    expand_nested=True,
+    dpi=200,
+    show_layer_activations=True,
+    show_trainable=True,
+)
 
 print("evaluate")
 model.evaluate(x_test, y_test_cat)
