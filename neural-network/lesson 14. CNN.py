@@ -57,6 +57,11 @@ keras.utils.plot_model(
 
 model.evaluate(x_test, y_test_cat)
 
+plt.plot(his.history['loss'])
+plt.plot(his.history['val_loss'])
+plt.grid(True)
+plt.show()
+
 # Распознавание всей тестовой выборки
 pred = model.predict(x_test)
 pred = np.argmax(pred, axis=1)
