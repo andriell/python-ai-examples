@@ -39,7 +39,7 @@ model.compile(optimizer='adam',
              metrics=['accuracy'])
 
 
-his = model.fit(x_train, y_train_cat, batch_size=32, epochs=5, validation_split=0.2)
+his = model.fit(x_train, y_train_cat, batch_size=32, epochs=15, validation_split=0.2)
 
 print(model.save_weights(filepath='lesson14.weights.h5'))
 keras.utils.plot_model(
