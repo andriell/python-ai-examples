@@ -1,0 +1,103 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist         # библиотека базы выборок Mnist
+from tensorflow import keras
+from tensorflow.keras.layers import Dense, Flatten, Input
+from sklearn.model_selection import train_test_split
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# стандартизация входных данных
+x_train = x_train / 255
+x_test = x_test / 255
+
+y_train_cat = keras.utils.to_categorical(y_train, 10)
+y_test_cat = keras.utils.to_categorical(y_test, 10)
+
+# отображение первых 25 изображений из обучающей выборки
+plt.figure(figsize=(10,5))
+for i in range(256):
+    plt.subplot(16,16,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.imshow(x_train[i], cmap=plt.cm.binary)
+
+plt.show()
+
+model = keras.Sequential([
+    Input(shape=(28, 28, 1)),
+    Flatten(), # Преобразует картинку в вектор
+    Dense(128, activation='relu'),
+    Dense(64, activation='relu'),
+    Dense(32, activation='relu'),
+    Dense(10, activation='softmax')
+])
+
+print(model.summary())      # вывод структуры НС в консоль
+
+myOpt = keras.optimizers.SGD(learning_rate=0.01, momentum=0.0, nesterov=True)
+
+model.compile(optimizer=myOpt,
+             loss='categorical_crossentropy',
+             metrics=['accuracy'])
+
+x_train_split, x_val_split, y_test_split, y_val_split = train_test_split(x_train, y_train_cat, test_size=0.2)
+
+# model.fit(x_train, y_train_cat, batch_size=32, epochs=7, validation_split=0.2)
+model.fit(x_train_split, y_test_split, batch_size=32, epochs=7, validation_data=(x_val_split, y_val_split))
+print(model.save_weights(filepath='lesson10.weights.h5'))
+keras.utils.plot_model(
+    model,
+    to_file="lesson10.model.png",
+    show_shapes=True,
+    show_dtype=True,
+    show_layer_names=True,
+    rankdir="TB",
+    expand_nested=True,
+    dpi=200,
+    show_layer_activations=True,
+    show_trainable=True,
+)
+
+print("evaluate")
+model.evaluate(x_test, y_test_cat)
+
+n = 1
+x = np.expand_dims(x_test[n], axis=0)
+res = model.predict(x)
+print( res )
+print( np.argmax(res) )
+
+plt.imshow(x_test[n], cmap=plt.cm.binary)
+plt.show()
+
+# Распознавание всей тестовой выборки
+pred = model.predict(x_test)
+pred = np.argmax(pred, axis=1)
+
+print(pred.shape)
+
+print(pred[:20])
+print(y_test[:20])
+
+# Выделение неверных вариантов
+mask = pred == y_test
+print(mask[:10])
+
+x_false = x_test[~mask]
+y_false = x_test[~mask]
+
+print(x_false.shape)
+
+# Вывод первых 25 неверных результатов
+plt.figure(figsize=(10,5))
+for i in range(25):
+    plt.subplot(5,5,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.imshow(x_false[i], cmap=plt.cm.binary)
+
+plt.show()

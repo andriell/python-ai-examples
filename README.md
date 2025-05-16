@@ -16,6 +16,7 @@
     pip3 install pocketsphinx
     pip install pillow
     pip install pydot graphviz
+    pip install scikit-learn
 
 ## Установка распознания речи
 
